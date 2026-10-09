@@ -4,9 +4,8 @@ services:
     volumes:
       - .:/app
       - /app/generated
-    environment:
-      - T_INVEST_TOKEN=${T_INVEST_TOKEN}
-      - T_INVEST_ACCOUNT_ID=${T_INVEST_ACCOUNT_ID}
+    env_file:
+      - .env
     restart: always
     tty: true
     stdin_open: true

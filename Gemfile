@@ -6,3 +6,4 @@ gem 'grpc-tools'
 
 gem 'zeitwerk'
 gem 'tty-prompt'
+gem 'i18n'

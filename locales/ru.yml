@@ -1,0 +1,25 @@
+ru:
+  main:
+    init_services_start: Инициализация gRPC канала и базовых сервисов
+    init_services_done: Настройка завершена. Аккаунт %{account_id} готов к работе
+  services:
+    account_setup:
+      account_found: "Аккаунт найден. Имя: %{name}, Статус: %{status}"
+      account_id_checking: Проверяем аккаунт из настроек ID %{account_id}
+      account_id_not_set_tip: "Совет: Чтобы бот не спрашивал это каждый раз, добавьте в .env: T_INVEST_ACCOUNT_ID=%{account_id}"
+      account_id_not_set: ID аккаунта не задан в .env. Запрашиваем список доступных счетов
+      account_not_found: Аккаунт с ID %{account_id} не найден в вашем профиле Т Банка. Проверьте настройки
+      account_selected: Успешно выбран счет ID %{account_id}
+      choose_account: Выберите аккаунт для работы (используйте стрелочки ↑/↓)
+      no_active_accounts: У вас нет открытых счетов в Т-Банке!
+  tinkoff:
+    public:
+      invest:
+        api:
+          contract:
+            v1:
+              client:
+                base_service:
+                  missing_stub_class: "Не удалось найти gRPC Stub по пути %{full_class_name}. Ошибка: %{message}"
+                  missing_request_class: "Не удалось найти класс запроса %{full_request_name}. Проверьте имя. Ошибка: %{message}"
+                  grpc_bad_status: "Ошибка gRPC %{class_name} [Код %{code}]: %{details}"
