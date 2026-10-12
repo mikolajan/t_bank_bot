@@ -2,6 +2,10 @@ ru:
   main:
     init_services_start: Инициализация gRPC канала и базовых сервисов
     init_services_done: Настройка завершена. Аккаунт %{account_id} готов к работе
+    init_services_error: "Не удалось запустить приложение: %{message}"
+    signal_trap:
+      received: Получен сигнал CTRL+C. Принудительно завершаем все треды
+      thread_stop: "Останавливаем поток: %{name}"
   services:
     account_setup:
       account_found: "Аккаунт найден. Имя: %{name}, Статус: %{status}"
@@ -32,3 +36,5 @@ ru:
                   missing_stub_class: "Не удалось найти gRPC Stub по пути %{full_class_name}. Ошибка: %{message}"
                   missing_request_class: "Не удалось найти класс запроса %{full_request_name}. Проверьте имя. Ошибка: %{message}"
                   grpc_bad_status: "Ошибка gRPC %{class_name} [Код %{code}]: %{details}"
+                market_data_stream_service:
+                  last_price: "Инструмент: %{ticker} | Текущая цена: %{price}"

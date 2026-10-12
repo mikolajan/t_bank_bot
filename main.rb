@@ -14,6 +14,7 @@ loader.push_dir(File.expand_path('./lib', __dir__))
 loader.ignore(tinkoff_extensions_path)
 loader.setup
 
+THREADS = {}
 Log = Support::Logger.logger
 Prompt = Support::Prompt.prompt
 Object.include(Support::I18nContext)
@@ -29,8 +30,30 @@ begin
   users_service = Tinkoff::Public::Invest::Api::Contract::V1::Client::UsersService.new(channel)
   account = Services::AccountSetup.call(users_service).account
   Log.info t('.init_services_done', account_id: account.id)
+
+
+  mdss = Tinkoff::Public::Invest::Api::Contract::V1::Client::MarketDataStreamService.new(channel)
+  THREADS[:mdss] = Thread.new do
+    mdss.listen_last_prices(instrument.uid)
+  end
 rescue => e
-  Log.error "Не удалось запустить приложение: #{e.message}"
+  Log.error t('.init_services_error', message: e.message)
   Log.error e.backtrace.join("\n")
   exit 1
 end
+
+Signal.trap("INT") do
+  Log.info t('.signal_trap.received')
+
+  THREADS.each do |name, thread|
+    if thread.alive?
+      Log.info t('.signal_trap.thread_stop', name: name)
+      puts "Останавливаем поток: #{name}"
+      thread.kill
+    end
+  end
+
+  exit
+end
+
+THREADS[:first].join

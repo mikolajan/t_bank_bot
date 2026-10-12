@@ -10,5 +10,11 @@ module Support
         log.level = ENV.fetch('LOG_LEVEL', 'INFO')
       end
     end
+
+    # \r moves the cursor to the beginning, \e[K clears the line to the end
+    def self.update_line(msg)
+      $stdout.print "\r#{msg}\e[K"
+      $stdout.flush
+    end
   end
 end
