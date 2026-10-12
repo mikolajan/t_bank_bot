@@ -10,8 +10,17 @@ ru:
       account_id_not_set: ID аккаунта не задан в .env. Запрашиваем список доступных счетов
       account_not_found: Аккаунт с ID %{account_id} не найден в вашем профиле Т Банка. Проверьте настройки
       account_selected: Успешно выбран счет ID %{account_id}
-      choose_account: Выберите аккаунт для работы (используйте стрелочки ↑/↓)
       no_active_accounts: У вас нет открытых счетов в Т-Банке!
+      select_prompt: Выберите аккаунт для работы (используйте стрелочки ↑/↓)
+    instrument_setup:
+      ask_prompt: Введите тикер или название инструмента для поиска (или 'exit' для выхода)
+      instrument_found: "Инструмент успешно загружен из .env: %{name} [%{ticker}]"
+      instrument_not_found: "Инструмент с UID '%{instrument_uid}' не найден в T-Invest API!"
+      instrument_selected: "Инструмент успешно выбран вручную: %{name} [%{ticker}]"
+      instrument_uid_checking: "Проверка T_INVEST_INSTRUMENT_UID: %{instrument_uid}"
+      instrument_uid_not_set_tip: "Совет: Чтобы не выбирать каждый раз, добавьте в .env: T_INVEST_INSTRUMENT_UID=%{instrument_uid}"
+      nothing_found: Ничего не найдено по запросу '%{query}'. Попробуйте еще раз
+      select_prompt: Выберите инструмент из списка (используйте стрелочки ↑/↓)
   tinkoff:
     public:
       invest:

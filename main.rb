@@ -22,11 +22,9 @@ begin
   Log.info t('.init_services_start')
   channel = Services::GrpcChannel.new
 
-  market_data = Tinkoff::Public::Invest::Api::Contract::V1::Client::MarketDataService.new(channel)
-  SBER_FIGI = 'BBG004730N88'
-  last_prices = market_data.get_last_prices(SBER_FIGI)
-  pp last_prices
-  pp last_prices.last.price.to_f
+  instruments_service = Tinkoff::Public::Invest::Api::Contract::V1::Client::InstrumentsService.new(channel)
+  instrument = Services::InstrumentSetup.call(instruments_service).instrument
+  Log.info "Инструмент успешно выбран: #{instrument.name} [UID: #{instrument.uid}]"
 
   users_service = Tinkoff::Public::Invest::Api::Contract::V1::Client::UsersService.new(channel)
   account = Services::AccountSetup.call(users_service).account
