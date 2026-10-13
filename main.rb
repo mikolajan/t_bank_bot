@@ -13,11 +13,23 @@ loader = Zeitwerk::Loader.new
 loader.push_dir(File.expand_path('./lib', __dir__))
 loader.ignore(tinkoff_extensions_path)
 loader.setup
+loader.eager_load_namespace(Strategies)
 
 THREADS = {}
 Log = Support::Logger.logger
 Prompt = Support::Prompt.prompt
 Object.include(Support::I18nContext)
+
+begin
+  channel = Services::GrpcChannel.new
+
+  strategy = Services::StrategySetup.call.strategy
+  strategy.call(channel)
+rescue => e
+  Log.error t('.init_strategies_error', message: e.message)
+  Log.error e.backtrace.join("\n")
+  exit 1
+end
 
 begin
   Log.info t('.init_services_start')
@@ -56,4 +68,4 @@ Signal.trap("INT") do
   exit
 end
 
-THREADS[:first].join
+THREADS[:first]&.join

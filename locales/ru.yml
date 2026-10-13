@@ -1,5 +1,6 @@
 ru:
   main:
+    init_strategies_error: "Не удалось запустить приложение: %{message}"
     init_services_start: Инициализация gRPC канала и базовых сервисов
     init_services_done: Настройка завершена. Аккаунт %{account_id} готов к работе
     init_services_error: "Не удалось запустить приложение: %{message}"
@@ -15,7 +16,7 @@ ru:
       account_not_found: Аккаунт с ID %{account_id} не найден в вашем профиле Т Банка. Проверьте настройки
       account_selected: Успешно выбран счет ID %{account_id}
       no_active_accounts: У вас нет открытых счетов в Т-Банке!
-      select_prompt: Выберите аккаунт для работы (используйте стрелочки ↑/↓)
+      select_prompt: Выберите аккаунт для работы
     instrument_setup:
       ask_prompt: Введите тикер или название инструмента для поиска (или 'exit' для выхода)
       instrument_found: "Инструмент успешно загружен из .env: %{name} [%{ticker}]"
@@ -24,7 +25,14 @@ ru:
       instrument_uid_checking: "Проверка T_INVEST_INSTRUMENT_UID: %{instrument_uid}"
       instrument_uid_not_set_tip: "Совет: Чтобы не выбирать каждый раз, добавьте в .env: T_INVEST_INSTRUMENT_UID=%{instrument_uid}"
       nothing_found: Ничего не найдено по запросу '%{query}'. Попробуйте еще раз
-      select_prompt: Выберите инструмент из списка (используйте стрелочки ↑/↓)
+      select_prompt: Выберите инструмент из списка
+    strategy_setup:
+      no_active_strategies: Стратегии не найдены
+      select_prompt: Выберите статегию для работы
+      strategy_selected: "Успешно выбрана стратегия: %{name}"
+  strategies:
+    reverse_martingale_strategy:
+      title: Реверсом с увеличением позиции (ReverseMartingaleStrategy)
   tinkoff:
     public:
       invest:
