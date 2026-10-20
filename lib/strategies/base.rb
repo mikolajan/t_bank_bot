@@ -11,20 +11,32 @@ module Strategies
       end
     end
 
-    def initialize(channel = Services::GrpcChannel.new)
+    def initialize(channel)
       @channel = channel
+      @subscribed_brokers = []
     end
 
     def call
       init_services
-      init_channels
+      init_grpc_services
       start
+    end
+
+    def subscribe_to(broker_class, key)
+      broker = Brokers::Registry.subscribe(broker_class:, key:, channel: @channel, strategy: self)
+      @subscribed_brokers << { broker_class: broker_class, key: key } if broker
+    end
+
+    def stop
+      @subscribed_brokers.each do |sub|
+        Brokers::Registry.unsubscribe(broker_class: sub[:broker_class], key: sub[:key], strategy: self)
+      end
     end
 
     private
 
     def init_services; end
-    def init_channels; end
+    def init_grpc_services; end
     def start; end
   end
 end

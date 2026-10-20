@@ -8,7 +8,7 @@ module Tinkoff
               class BaseService
                 attr_reader :channel, :stub
 
-                def initialize(channel = Services::GrpcChannel.new)
+                def initialize(channel)
                   @channel = channel
                   @stub = build_stub_class.new(@channel.endpoint, @channel.credentials)
                 end

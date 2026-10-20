@@ -1,12 +1,27 @@
 ru:
+  brokers:
+    market_data_stream_broker:
+      error: Ошибка в стриме маркет-даты [%{key}] -- %{message}"
+      disconnected:  Стрим маркет-даты для ключа [%{key}] отключен сервером
+      starting: Запуск стрима маркет-даты для ключа [%{key}]
+      stopped: Стрим маркет-даты для ключа [%{key}] остановлен
+      retrying: Повторное подключение стрима маркет-даты для ключа [%{key}] через %{delay} секунд
+    registry:
+      subscribed: Registry. Стратегия [%{strategy_name}] успешно подписалась на брокер [%{broker_class}] Инструмент [%{key}]
+      unsubscribed: Registry. Стратегия [%{strategy_name}] отписалась от брокера [%{broker_class}] Инструмент [%{key}]
+      no_subscribers_left: В брокере [%{broker_class}] для инструмента [%{key}] не осталось подписчиков. Инициирована остановка
+  global:
+    errors:
+      not_implemented_error: "%{class_name} должен реализовать метод %{method_name}"
   main:
     init_strategies_error: "Не удалось запустить приложение: %{message}"
     init_services_start: Инициализация gRPC канала и базовых сервисов
     init_services_done: Настройка завершена. Аккаунт %{account_id} готов к работе
     init_services_error: "Не удалось запустить приложение: %{message}"
     signal_trap:
+      bot_stopped: Робот успешно остановлен
       received: Получен сигнал CTRL+C. Принудительно завершаем все треды
-      thread_stop: "Останавливаем поток: %{name}"
+      thread_stop: Останавливаем поток %{name}
   services:
     account_setup:
       account_found: "Аккаунт найден. Имя: %{name}, Статус: %{status}"
